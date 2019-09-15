@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WangJun.Yun
 {
@@ -21,14 +19,18 @@ namespace WangJun.Yun
             return inst;
 
         }
-         
-        public RES SaveTo(string folderPath,string fileName, byte[] data)
+
+        public RES SaveTo(string folderPath, string fileName, byte[] data)
         {
             try
             {
                 this.CreateFolder(folderPath);
-                var filePath = $"{this.rootPath}\\{folderPath}\\{fileName}"; 
+                var filePath = $"{this.rootPath}\\{folderPath}\\{fileName}";
                 File.WriteAllBytes(filePath, data);
+                var fileInfo = new FileInfo(filePath);
+                var fs = fileInfo.OpenWrite();
+                fs.Write(data, 0, data.Length);
+                fs.Close();
                 return RES.OK($"{folderPath}\\{fileName}");
 
             }
@@ -36,29 +38,33 @@ namespace WangJun.Yun
             {
                 return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{folderPath}\\{fileName}");
             }
-        } 
-        public RES Delete(string path)
+        }
+        public RES Delete(string folderPath, string fileName)
         {
+            var filePath = $"{this.rootPath}\\{folderPath}\\{fileName}";
+
             try
             {
-                var filePath = $"{this.rootPath}\\{path}";
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
+                    return RES.OK("文件不存在");
                 }
                 return RES.FAIL("文件不存在");
 
             }
             catch (Exception ex)
             {
-                return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{path}");
+                return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{filePath}");
             }
-        } 
-        public RES Query(string path)
+        }
+        public RES Query(string folderPath, string fileName)
         {
+            var filePath = $"{this.rootPath}\\{folderPath}\\{fileName}";
+
             try
             {
-                var filePath = $"{this.rootPath}\\{path}";
+
                 if (File.Exists(filePath))
                 {
                     var fileInfo = new FileInfo(filePath);
@@ -69,14 +75,15 @@ namespace WangJun.Yun
             }
             catch (Exception ex)
             {
-                return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{path}");
+                return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{filePath}");
             }
-        } 
-        public RES QueryDirectory(string path)
+        }
+        public RES QueryDirectory(string folderPath)
         {
+            var dirPath = $"{this.rootPath}\\{folderPath}";
+
             try
             {
-                var dirPath = $"{this.rootPath}\\{path}";
                 if (Directory.Exists(dirPath))
                 {
                     var files = Directory.GetFiles(dirPath);
@@ -90,14 +97,15 @@ namespace WangJun.Yun
             }
             catch (Exception ex)
             {
-                return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{path}");
+                return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{dirPath}");
             }
-        } 
-        public RES Download(string path)
+        }
+        public RES Download(string folderPath, string fileName)
         {
+            var filePath = $"{this.rootPath}\\{folderPath}\\{fileName}";
+
             try
             {
-                var filePath = $"{this.rootPath}\\{path}";
                 if (File.Exists(filePath))
                 {
                     var fileInfo = new FileInfo(filePath);
@@ -111,13 +119,14 @@ namespace WangJun.Yun
             }
             catch (Exception ex)
             {
-                return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{path}");
+                return RES.FAIL($"{ex.Message}\t{((null != ex.InnerException) ? ex.InnerException.Message : string.Empty)}\t{filePath}");
             }
         }
 
         public RES CreateFolder(string folderPath)
         {
-            if (!string.IsNullOrWhiteSpace(folderPath)) {
+            if (!string.IsNullOrWhiteSpace(folderPath))
+            {
                 var absolutePath = this.rootPath;
                 var arr = folderPath.Split(new char[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 var queue = new Queue<string>(arr);
@@ -127,7 +136,7 @@ namespace WangJun.Yun
                     var path = $"{absolutePath}\\{folderName}";
                     if (!Directory.Exists(path))
                     {
-                        var dir = Directory.CreateDirectory(path); 
+                        var dir = Directory.CreateDirectory(path);
                         absolutePath = path;
                     }
                 }

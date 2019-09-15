@@ -23,8 +23,13 @@ namespace WangJun.FileAPP
             //});
 
             var rootPath = AppDomain.CurrentDomain.BaseDirectory;
+            var res4 = FileService.GetInst(rootPath).Delete("/DATA/tets/", "1.TXT");
+
             //FileService.GetInst(rootPath).CreateFolder($"/DATA/Log1/");
            FileService.GetInst(rootPath).SaveTo("/DATA/tets/","1.TXT", Encoding.UTF8.GetBytes("汪俊"));
+           var res1 =  FileService.GetInst(rootPath).Query("/DATA/tets/", "1.TXT");
+            var res2 = FileService.GetInst(rootPath).QueryDirectory("/DATA/");
+            var res3 = FileService.GetInst(rootPath).Download("/DATA/tets/", "1.TXT");
             Console.ReadKey();
 
         }
