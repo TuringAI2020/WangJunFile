@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\WangJunMQ\WangJun.MQ\WangJun.MQ.csproj">
+      <Project>{14c4b26e-e95a-401d-bc80-8f998e47440c}</Project>
+      <Name>WangJun.MQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WangJunTuringAI2020\WangJun.Common\WangJun.Common.csproj">
       <Project>{D2FE513E-355E-44BA-96FE-844970CF960D}</Project>
       <Name>WangJun.Common</Name>

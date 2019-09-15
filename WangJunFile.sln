@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WangJun.Common", "..\WangJu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WangJun.FileAPP", "WangJun.FileAPP\WangJun.FileAPP.csproj", "{2298363A-C6D6-4DC7-9E28-95E2A98BA82D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WangJun.MQ", "..\WangJunMQ\WangJun.MQ\WangJun.MQ.csproj", "{14C4B26E-E95A-401D-BC80-8F998E47440C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WangJun.API.FileService", "WangJun.API.FileService\WangJun.API.FileService.csproj", "{F74AEA82-2993-41D4-86DF-AC5362FEF17C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2298363A-C6D6-4DC7-9E28-95E2A98BA82D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2298363A-C6D6-4DC7-9E28-95E2A98BA82D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2298363A-C6D6-4DC7-9E28-95E2A98BA82D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14C4B26E-E95A-401D-BC80-8F998E47440C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14C4B26E-E95A-401D-BC80-8F998E47440C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14C4B26E-E95A-401D-BC80-8F998E47440C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14C4B26E-E95A-401D-BC80-8F998E47440C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F74AEA82-2993-41D4-86DF-AC5362FEF17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F74AEA82-2993-41D4-86DF-AC5362FEF17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F74AEA82-2993-41D4-86DF-AC5362FEF17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F74AEA82-2993-41D4-86DF-AC5362FEF17C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
